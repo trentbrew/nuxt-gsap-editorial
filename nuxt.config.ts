@@ -2,12 +2,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@hypernym/nuxt-gsap'],
+  modules: ['@nuxtjs/tailwindcss', '@hypernym/nuxt-gsap'],
   gsap: {
     composables: true,
     extraPlugins: {
-      scrollTrigger: true
-    }
+      scrollTrigger: true,
+    },
   },
-  css: ['~/assets/css/main.css']
-})
+  css: ['~/assets/css/main.css'],
+});
