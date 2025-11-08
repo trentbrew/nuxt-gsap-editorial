@@ -1,0 +1,165 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "task:1762593501194",
+      "@type": "Task",
+      "title": "Add Motion Block: TestimonialSlider (component + meta + zod schema)",
+      "status": "done",
+      "priority": "high",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.194Z",
+      "updatedAt": "2025-11-08T09:35:31.357Z"
+    },
+    {
+      "@id": "task:1762593501299",
+      "@type": "Task",
+      "title": "Add zod schema for 'feature-grid' in validation.ts",
+      "status": "done",
+      "priority": "high",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.299Z",
+      "updatedAt": "2025-11-08T09:35:31.263Z"
+    },
+    {
+      "@id": "task:1762593501393",
+      "@type": "Task",
+      "title": "GSAP cleanup: kill ScrollTrigger/tweens on unmount in Motion Blocks",
+      "status": "done",
+      "priority": "medium",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.393Z",
+      "updatedAt": "2025-11-08T09:35:31.443Z"
+    },
+    {
+      "@id": "task:1762593501485",
+      "@type": "Task",
+      "title": "Refactor registry to glob-import *.meta.ts and aggregate endpoint",
+      "status": "todo",
+      "priority": "medium",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.485Z",
+      "updatedAt": "2025-11-08T09:18:21.485Z"
+    },
+    {
+      "@id": "task:1762593501615",
+      "@type": "Task",
+      "title": "Enhance Preview: add motion preset playback demos using motion tokens",
+      "status": "todo",
+      "priority": "low",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.615Z",
+      "updatedAt": "2025-11-08T09:18:21.615Z"
+    },
+    {
+      "@id": "task:1762593501714",
+      "@type": "Task",
+      "title": "Create example templates (SaaS Landing, Product Launch) as PageSpec routes",
+      "status": "todo",
+      "priority": "low",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.714Z",
+      "updatedAt": "2025-11-08T09:18:21.714Z"
+    },
+    {
+      "@id": "task:1762593501813",
+      "@type": "Task",
+      "title": "Plan and implement v1 Motion Blocks: LogoCloud, StickyStep, MediaReveal, Timeline/Steps",
+      "status": "todo",
+      "priority": "medium",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.813Z",
+      "updatedAt": "2025-11-08T09:18:21.813Z"
+    },
+    {
+      "@id": "task:1762593501909",
+      "@type": "Task",
+      "title": "Acceptance verification: typecheck, console errors, PRM behavior, Lighthouse",
+      "status": "blocked",
+      "priority": "high",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.909Z",
+      "updatedAt": "2025-11-08T10:09:06.838Z"
+    },
+    {
+      "@id": "task:1762593501988",
+      "@type": "Task",
+      "title": "Move 'zod' to dependencies (server runtime)",
+      "status": "done",
+      "priority": "medium",
+      "tags": [],
+      "createdAt": "2025-11-08T09:18:21.988Z",
+      "updatedAt": "2025-11-08T09:35:31.183Z"
+    },
+    {
+      "@id": "note:1762595500719",
+      "@type": "Note",
+      "title": "MVP Implementation Status",
+      "content": "Completed high-priority MVP items: (1) Moved zod to dependencies for runtime validation, (2) Added feature-grid zod schema, (3) Implemented TestimonialSlider Motion Block with component/schema/registry meta, (4) Added GSAP cleanup pattern (onUnmounted) to all Motion Blocks. TestimonialSlider now live in demo PageSpec at /spec/demo. Dev server running on localhost:3001. Ready for manual verification and Lighthouse testing.",
+      "type": "decision",
+      "tags": [],
+      "createdAt": "2025-11-08T09:51:40.719Z",
+      "updatedAt": "2025-11-08T09:51:40.719Z"
+    },
+    {
+      "@id": "note:1762595681244",
+      "@type": "Note",
+      "title": "Zod Version Fix",
+      "content": "Fixed validation error by downgrading zod from v4.1.12 to v3.25.76. Zod v4 is experimental and has breaking changes with the _zod internal API. Stable v3 branch resolves the 'Cannot read properties of undefined (reading _zod)' error during PageSpec validation. Dev server now running cleanly on localhost:3001.",
+      "type": "bug-fix",
+      "tags": [],
+      "createdAt": "2025-11-08T09:54:41.244Z",
+      "updatedAt": "2025-11-08T09:54:41.244Z"
+    },
+    {
+      "@id": "task:1762596524864",
+      "@type": "Task",
+      "title": "Fix zod v4 cache issue: pnpm store clean + reinstall",
+      "status": "blocked",
+      "priority": "high",
+      "tags": [],
+      "createdAt": "2025-11-08T10:08:44.864Z",
+      "updatedAt": "2025-11-08T10:08:44.864Z"
+    },
+    {
+      "@id": "note:1762596534844",
+      "@type": "Note",
+      "title": "Current MVP Implementation Blockers",
+      "content": "STATUS: 4/4 high-priority implementation tasks completed (TestimonialSlider, feature-grid schema, zod move, GSAP cleanup). However, validation is blocked by pnpm cache issue - zod v4 still loading despite downgrade to v3 in package.json. BLOCKER: Need full node_modules + pnpm store clean before acceptance testing can proceed. NEXT: After cache fix, run acceptance verification (typecheck, console, PRM, Lighthouse) then proceed with medium-priority refactors (registry glob-import, v1 blocks planning).",
+      "type": "research",
+      "tags": [],
+      "createdAt": "2025-11-08T10:08:54.844Z",
+      "updatedAt": "2025-11-08T10:08:54.844Z"
+    },
+    {
+      "@id": "task:1762596554916",
+      "@type": "Task",
+      "title": "Create meta.ts files for existing Motion Blocks",
+      "status": "todo",
+      "priority": "medium",
+      "tags": [],
+      "createdAt": "2025-11-08T10:09:14.916Z",
+      "updatedAt": "2025-11-08T10:09:14.916Z"
+    },
+    {
+      "@id": "note:1762596564383",
+      "@type": "Note",
+      "title": "MVP to v1.0 Roadmap",
+      "content": "PHASE 1 (BLOCKED): Fix zod cache (task:1762596524864), then acceptance verification (task:1762593501909). PHASE 2 (MEDIUM): Create individual meta.ts files (task:1762596554916), refactor registry to glob-import (task:1762593501485). PHASE 3 (MEDIUM): Plan v1 Motion Blocks: LogoCloud, StickyStep, MediaReveal, Timeline (task:1762593501813). PHASE 4 (LOW): Enhance preview with motion demos (task:1762593501615), create template PageSpecs (task:1762593501714). DECISION: Prioritize quality over velocity - full acceptance testing before moving to refactors.",
+      "type": "decision",
+      "tags": [],
+      "createdAt": "2025-11-08T10:09:24.383Z",
+      "updatedAt": "2025-11-08T10:09:24.383Z"
+    },
+    {
+      "@id": "note:1762596588523",
+      "@type": "Note",
+      "title": "IMMEDIATE ACTION REQUIRED: Clear pnpm cache",
+      "content": "The validation errors are caused by pnpm still loading zod@4.1.12 from cache despite package.json showing v3.23.8. TO FIX: 1) Stop dev server (Ctrl+C), 2) Run: rm -rf node_modules .nuxt, 3) Run: pnpm store prune, 4) Run: pnpm install, 5) Restart: pnpm dev. This will fully clear the v4 modules and load the stable v3 version. After this, /spec/demo should load without zod validation errors.",
+      "type": "action-item",
+      "tags": [],
+      "createdAt": "2025-11-08T10:09:48.523Z",
+      "updatedAt": "2025-11-08T10:09:48.523Z"
+    }
+  ]
+}

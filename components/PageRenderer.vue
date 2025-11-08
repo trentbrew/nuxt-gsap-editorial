@@ -4,6 +4,7 @@ import TextBlock from '~/components/blocks/TextBlock.vue'
 import HeroWithParallax from '~/components/blocks/HeroWithParallax.vue'
 import CTASection from '~/components/blocks/CTASection.vue'
 import FeatureGrid from '~/components/blocks/FeatureGrid.vue'
+import TestimonialSlider from '~/components/blocks/TestimonialSlider.vue'
 
 const props = defineProps<{ spec: PageSpec }>()
 
@@ -13,6 +14,7 @@ const componentsMap: Record<string, any> = {
   'hero-with-parallax': HeroWithParallax,
   'cta-section': CTASection,
   'feature-grid': FeatureGrid,
+  'testimonial-slider': TestimonialSlider,
 }
 
 const resolve = (id: string) => componentsMap[id]

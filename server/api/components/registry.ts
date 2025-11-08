@@ -151,6 +151,56 @@ export default defineEventHandler(() => {
         },
       ],
     },
+    {
+      id: 'testimonial-slider',
+      name: 'Testimonial Slider',
+      category: 'content',
+      semantics: {
+        purpose: 'Display rotating customer testimonials with quotes and attribution',
+        whenToUse: ['Social proof sections', 'Customer success stories', 'Trust building'],
+      },
+      props: {
+        eyebrow: { type: 'string', required: false },
+        headline: { type: 'string', required: true },
+        testimonials: { type: 'Array<Testimonial>', required: true },
+        align: { type: '"left"|"center"', default: 'left' },
+        autoplay: { type: 'boolean', default: false },
+        interval: { type: 'number', default: 5000, constraints: 'Range 1000-30000ms' },
+      },
+      a11y: {
+        considerations: 'Ensure quotes have proper attribution; autoplay respects prefers-reduced-motion; provide keyboard navigation for dots/arrows.',
+      },
+      motion: {
+        defaultPreset: 'slideIn',
+        allowedPresets: ['slideIn', 'fadeUp'],
+      },
+      examples: [
+        {
+          title: 'Customer testimonials with autoplay',
+          props: {
+            eyebrow: 'What Our Customers Say',
+            headline: 'Trusted by Thousands',
+            align: 'center',
+            autoplay: true,
+            interval: 5000,
+            testimonials: [
+              {
+                quote: 'This platform transformed how we handle customer onboarding. The results were immediate and impressive.',
+                author: 'Sarah Chen',
+                title: 'Head of Product, TechCorp',
+                avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face',
+              },
+              {
+                quote: 'The best investment we made this year. Customer satisfaction scores increased by 40%.',
+                author: 'Marcus Johnson',
+                title: 'CEO, StartupXYZ',
+                avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
+              },
+            ],
+          },
+        },
+      ],
+    },
   ]
 
   return registry

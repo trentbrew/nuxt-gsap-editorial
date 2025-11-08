@@ -30,6 +30,19 @@ onMounted(() => {
     },
   })
 })
+
+onUnmounted(() => {
+  // Kill any animations and ScrollTriggers for this component
+  const items = root.value?.querySelectorAll('.feature-item')
+  if (items) {
+    $gsap.killTweensOf(items)
+  }
+  ScrollTrigger.getAll().forEach(trigger => {
+    if (trigger.trigger === root.value) {
+      trigger.kill()
+    }
+  })
+})
 </script>
 
 <template>

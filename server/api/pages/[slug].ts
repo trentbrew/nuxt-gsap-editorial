@@ -49,6 +49,36 @@ export default defineEventHandler(async (event) => {
             },
           },
           {
+            component: 'testimonial-slider',
+            props: {
+              eyebrow: 'What Our Customers Say',
+              headline: 'Trusted by Storytellers',
+              align: 'center',
+              autoplay: true,
+              interval: 6000,
+              testimonials: [
+                {
+                  quote: 'This platform transformed how we handle customer onboarding. The results were immediate and impressive.',
+                  author: 'Sarah Chen',
+                  title: 'Head of Product, TechCorp',
+                  avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face',
+                },
+                {
+                  quote: 'The best investment we made this year. Customer satisfaction scores increased by 40%.',
+                  author: 'Marcus Johnson',
+                  title: 'CEO, StartupXYZ',
+                  avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
+                },
+                {
+                  quote: 'Beautifully designed, incredibly powerful. Our editorial team loves the flexibility.',
+                  author: 'Elena Rodriguez',
+                  title: 'Creative Director, MediaCo',
+                  avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face',
+                },
+              ],
+            },
+          },
+          {
             component: 'cta-section',
             props: {
               eyebrow: 'Ready to start?',

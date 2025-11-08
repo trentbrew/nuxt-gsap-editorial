@@ -35,10 +35,38 @@ export async function validatePageSpec(spec: any) {
     align: z.enum(['left', 'center']).default('center'),
   })
 
+  const featureGridSchema = z.object({
+    eyebrow: z.string().optional(),
+    headline: z.string(),
+    features: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+      icon: z.string().optional(),
+    })),
+    columns: z.number().int().min(2).max(4).default(3),
+    align: z.enum(['left', 'center']).default('left'),
+  })
+
+  const testimonialSliderSchema = z.object({
+    eyebrow: z.string().optional(),
+    headline: z.string(),
+    testimonials: z.array(z.object({
+      quote: z.string(),
+      author: z.string(),
+      title: z.string().optional(),
+      avatar: z.string().optional(),
+    })),
+    align: z.enum(['left', 'center']).default('left'),
+    autoplay: z.boolean().default(false),
+    interval: z.number().int().min(1000).max(30000).default(5000),
+  })
+
   const blockSchemas: Record<string, any> = {
     'text-block': textBlockSchema,
     'hero-with-parallax': heroWithParallaxSchema,
     'cta-section': ctaSectionSchema,
+    'feature-grid': featureGridSchema,
+    'testimonial-slider': testimonialSliderSchema,
   }
 
   const SectionSchema = z
