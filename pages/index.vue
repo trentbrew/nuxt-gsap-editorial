@@ -16,6 +16,9 @@
   const introText = ref();
   const horizontalSection = ref();
   const horizontalContent = ref();
+  const horizontalImageRefs = ref<any[]>([]);
+  const horizontalIntroText = ref();
+  const horizontalOutroText = ref();
   const stickyText = ref();
   const stickyTitle = ref();
   const pinnedSection = ref();
@@ -30,37 +33,49 @@
   const finalTitle = ref();
   const finalText = ref();
 
-  // Data
-  const horizontalPanels = [
+  // Data - Horizontal scroll images with varied sizes
+  const horizontalImages = [
     {
-      title: 'Visual Impact',
-      description:
-        'How imagery transforms narrative understanding and emotional connection in digital media.',
-      color: '#2563eb',
+      src: 'https://picsum.photos/600/750?random=1',
+      width: 'w-[600px]',
+      height: 'h-[750px]',
+      offset: 'top-[5%]',
+      speed: 0.5,
     },
     {
-      title: 'Interactive Elements',
-      description:
-        'The role of user engagement in modern storytelling through responsive design and animation.',
-      color: '#dc2626',
+      src: 'https://picsum.photos/550/700?random=2',
+      width: 'w-[550px]',
+      height: 'h-[700px]',
+      offset: 'top-[20%]',
+      speed: 0.8,
     },
     {
-      title: 'Temporal Flow',
-      description:
-        'Managing pace and rhythm in digital narratives to maintain audience attention and interest.',
-      color: '#059669',
+      src: 'https://picsum.photos/700/550?random=3',
+      width: 'w-[700px]',
+      height: 'h-[550px]',
+      offset: 'top-[10%]',
+      speed: 0.6,
     },
     {
-      title: 'Emotional Resonance',
-      description:
-        'Creating lasting impact through carefully crafted moments of revelation and reflection.',
-      color: '#7c2d12',
+      src: 'https://picsum.photos/580/720?random=4',
+      width: 'w-[580px]',
+      height: 'h-[720px]',
+      offset: 'top-[25%]',
+      speed: 0.7,
     },
     {
-      title: 'Technical Innovation',
-      description:
-        "Leveraging cutting-edge web technologies to push the boundaries of what's possible in storytelling.",
-      color: '#4338ca',
+      src: 'https://picsum.photos/650/600?random=5',
+      width: 'w-[650px]',
+      height: 'h-[600px]',
+      offset: 'top-[15%]',
+      speed: 0.9,
+    },
+    {
+      src: 'https://picsum.photos/560/780?random=6',
+      width: 'w-[560px]',
+      height: 'h-[780px]',
+      offset: 'top-[8%]',
+      speed: 0.55,
     },
   ];
 
@@ -175,18 +190,63 @@
       },
     });
 
-    // Horizontal scroll animation
-    const horizontalScrollTl = $gsap.to(horizontalContent.value, {
-      xPercent: -80,
+    // Horizontal scroll animation with parallax effect
+    const scrollDistance = 4000; // Distance to scroll through (increased for offset start)
+    
+    // Pin the section while scrolling
+    $ScrollTrigger.create({
+      trigger: horizontalSection.value,
+      pin: true,
+      start: 'top top',
+      end: () => '+=' + scrollDistance,
+    });
+
+    // Individual image parallax - each moves at different speed (NYT-style)
+    horizontalImageRefs.value.forEach((imageEl, index) => {
+      if (!imageEl) return;
+      
+      const speed = horizontalImages[index].speed;
+      const distance = -scrollDistance * speed;
+      
+      $gsap.to(imageEl, {
+        x: distance,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: horizontalSection.value,
+          start: 'top top',
+          end: () => '+=' + scrollDistance,
+          scrub: 1,
+        },
+      });
+    });
+
+    // Intro text fade out as images scroll over it
+    $gsap.to(horizontalIntroText.value, {
+      opacity: 0,
       ease: 'none',
       scrollTrigger: {
         trigger: horizontalSection.value,
-        pin: true,
+        start: 'top top+=300',
+        end: 'top top+=1000',
         scrub: 1,
-        end: () =>
-          '+=' + (horizontalContent.value.scrollWidth - window.innerWidth),
       },
     });
+
+    // Outro text fade in as we reach the end
+    $gsap.fromTo(
+      horizontalOutroText.value,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: horizontalSection.value,
+          start: () => 'top top+=' + (scrollDistance - 1000),
+          end: () => 'top top+=' + scrollDistance,
+          scrub: 1,
+        },
+      }
+    );
 
     // Sticky text effect
     $gsap
@@ -613,25 +673,46 @@
     <!-- Horizontal Scroll Section -->
     <section
       ref="horizontalSection"
-      class="h-screen overflow-hidden bg-base-100 text-base-content"
+      class="h-screen overflow-hidden bg-base-100 text-base-content relative"
     >
-      <div class="h-full flex items-center">
-        <div ref="horizontalContent" class="flex h-full">
+      <div class="h-full flex items-center overflow-x-hidden">
+        <div ref="horizontalContent" class="relative h-full flex items-center pl-24 pr-24" style="width: 5200px;">
+          <!-- Intro Text - Behind Images (Centered) -->
           <div
-            class="flex-none w-screen h-full flex items-center justify-center px-8"
-            v-for="(panel, index) in horizontalPanels"
-            :key="index"
+            ref="horizontalIntroText"
+            class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 max-w-2xl text-center"
           >
-            <div class="max-w-[500px] text-center">
-              <div
-                class="w-[250px] md:w-[300px] h-[150px] md:h-[200px] mx-auto mb-8 rounded-xl flex items-center justify-center text-white text-5xl font-bold"
-                :style="{ backgroundColor: panel.color }"
-              >
-                <span class="">{{ String(index + 1).padStart(2, '0') }}</span>
-              </div>
-              <h3 class="mb-4 serif">{{ panel.title }}</h3>
-              <p class="mx-auto text-body">{{ panel.description }}</p>
-            </div>
+            <p class="text-base-content/40 text-2xl md:text-3xl leading-relaxed serif">
+              A visual journey through moments that shaped our narrative, capturing the essence of storytelling in its purest form.
+            </p>
+          </div>
+          
+          <!-- Images (Start off-screen right) -->
+          <div
+            v-for="(image, index) in horizontalImages"
+            :key="index"
+            :ref="(el) => (horizontalImageRefs[index] = el)"
+            class="absolute z-10"
+            :class="[image.offset]"
+            :style="{ left: `${1200 + index * 520}px` }"
+          >
+            <img
+              :src="image.src"
+              :alt="`Gallery image ${index + 1}`"
+              :class="[image.width, image.height]"
+              class="object-cover rounded-none shadow-2xl"
+            />
+          </div>
+          
+          <!-- Outro Text - Behind Images -->
+          <div
+            ref="horizontalOutroText"
+            class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 max-w-2xl text-center"
+            style="left: calc(50% + 3400px);"
+          >
+            <p class="text-base-content/40 text-2xl md:text-3xl leading-relaxed serif">
+              Each image tells a story, and together they weave a tapestry of human experience and creative expression.
+            </p>
           </div>
         </div>
       </div>
