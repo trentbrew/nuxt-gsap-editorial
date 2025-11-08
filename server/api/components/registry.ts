@@ -201,6 +201,45 @@ export default defineEventHandler(() => {
         },
       ],
     },
+    {
+      id: 'horizontal-scroll-gallery',
+      name: 'Horizontal Scroll Gallery',
+      category: 'media',
+      semantics: {
+        purpose: 'Pin viewport and horizontally scroll through image gallery with parallax',
+        whenToUse: ['Photo essays', 'Portfolio showcases', 'Visual narratives', 'NYT-style immersive stories'],
+      },
+      props: {
+        eyebrow: { type: 'string', required: false },
+        introText: { type: 'string', required: true },
+        outroText: { type: 'string', required: true },
+        images: { type: 'Array<GalleryImage>', required: true, constraints: 'Min 3 images' },
+        scrollDistance: { type: 'number', default: 4000, constraints: 'Range 1000-10000px' },
+      },
+      a11y: {
+        considerations: 'Respects prefers-reduced-motion (disables parallax); provide alt text for all images; ensure text contrast meets WCAG standards.',
+      },
+      motion: {
+        defaultPreset: 'horizontalScroll',
+        allowedPresets: ['horizontalScroll'],
+      },
+      examples: [
+        {
+          title: 'Photo essay with varied image sizes',
+          props: {
+            eyebrow: 'Visual Story',
+            introText: 'Exploring the intersection of design and narrative',
+            outroText: 'A journey through composition and motion',
+            scrollDistance: 4000,
+            images: [
+              { src: 'https://picsum.photos/600/750?random=1', width: 'w-[600px]', height: 'h-[750px]', offset: 'top-[5%]', speed: 0.5 },
+              { src: 'https://picsum.photos/550/700?random=2', width: 'w-[550px]', height: 'h-[700px]', offset: 'top-[20%]', speed: 0.8 },
+              { src: 'https://picsum.photos/700/550?random=3', width: 'w-[700px]', height: 'h-[550px]', offset: 'top-[10%]', speed: 0.6 },
+            ],
+          },
+        },
+      ],
+    },
   ]
 
   return registry

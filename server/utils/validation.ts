@@ -61,12 +61,45 @@ export async function validatePageSpec(spec: any) {
     interval: z.number().int().min(1000).max(30000).default(5000),
   })
 
+  const horizontalScrollGallerySchema = z.object({
+    eyebrow: z.string().optional(),
+    introText: z.string(),
+    outroText: z.string(),
+    images: z.array(z.object({
+      src: z.string().url(),
+      width: z.string(),
+      height: z.string(),
+      offset: z.string(),
+      speed: z.number().min(0.1).max(1.5),
+    })),
+    scrollDistance: z.number().int().min(1000).max(10000).default(4000),
+  })
+
+  const overlappingCardsSchema = z.object({
+    eyebrow: z.string().optional(),
+    headline: z.string(),
+    cards: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+      stat1: z.object({
+        number: z.string(),
+        label: z.string(),
+      }).optional(),
+      stat2: z.object({
+        number: z.string(),
+        label: z.string(),
+      }).optional(),
+    })),
+  })
+
   const blockSchemas: Record<string, any> = {
     'text-block': textBlockSchema,
     'hero-with-parallax': heroWithParallaxSchema,
     'cta-section': ctaSectionSchema,
     'feature-grid': featureGridSchema,
     'testimonial-slider': testimonialSliderSchema,
+    'horizontal-scroll-gallery': horizontalScrollGallerySchema,
+    'overlapping-cards': overlappingCardsSchema,
   }
 
   const SectionSchema = z

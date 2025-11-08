@@ -5,6 +5,8 @@ import HeroWithParallax from '~/components/blocks/HeroWithParallax.vue'
 import CTASection from '~/components/blocks/CTASection.vue'
 import FeatureGrid from '~/components/blocks/FeatureGrid.vue'
 import TestimonialSlider from '~/components/blocks/TestimonialSlider.vue'
+import HorizontalScrollGallery from '~/components/blocks/HorizontalScrollGallery.vue'
+import OverlappingCards from '~/components/blocks/OverlappingCards.vue'
 
 const props = defineProps<{ spec: PageSpec }>()
 
@@ -15,6 +17,8 @@ const componentsMap: Record<string, any> = {
   'cta-section': CTASection,
   'feature-grid': FeatureGrid,
   'testimonial-slider': TestimonialSlider,
+  'horizontal-scroll-gallery': HorizontalScrollGallery,
+  'overlapping-cards': OverlappingCards,
 }
 
 const resolve = (id: string) => componentsMap[id]
